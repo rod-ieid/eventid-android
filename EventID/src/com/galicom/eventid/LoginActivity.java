@@ -6,31 +6,30 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
-public class MainActivity extends Activity {
+public class LoginActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_login);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+		getMenuInflater().inflate(R.menu.activity_login, menu);
 		return true;
 	}
-
-	public void signupOnClick(View view)
+	public void profileOnClick(View view)
 	{
 		Intent intent;
-		intent = new Intent(this, SignupActivity.class);
+		intent = new Intent(this, ProfilActivity.class);
 		startActivity(intent);
 	}
-	public void loginOnClick(View view)
+	public void logoutOnClick(View view)
 	{
 		Intent intent;
-		intent = new Intent(this, LoginActivity.class);
+		intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 	}
 
