@@ -38,6 +38,7 @@
         android:inputType="textPassword" >
 
         <requestFocus />
+
     </EditText>
 
     <EditText
@@ -48,6 +49,10 @@
         android:layout_alignLeft="@+id/editText2"
         android:layout_marginBottom="30dp"
         android:ems="10"
-        android:hint="Email" />
+        android:hint="Email" >
+
+        <requestFocus />
+
+    </EditText>
 
 </RelativeLayout>
