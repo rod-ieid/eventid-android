@@ -5,8 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
-import static us.monoid.web.Resty.*;
-import us.monoid.web.Resty.*;
+
 
 public class LoginActivity extends Activity {
 
@@ -24,6 +23,8 @@ public class LoginActivity extends Activity {
 	}
 	public void profileOnClick(View view)
 	{
+		
+		
 		Intent intent;
 		intent = new Intent(this, ProfilActivity.class);
 		startActivity(intent);

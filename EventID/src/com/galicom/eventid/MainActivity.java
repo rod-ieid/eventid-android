@@ -1,6 +1,13 @@
 package com.galicom.eventid;
 
+import java.io.IOException;
+
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.os.StrictMode.ThreadPolicy;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,8 +18,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-
+import static us.monoid.web.Resty.*;
+import us.monoid.web.JSONResource;
+import us.monoid.web.Resty;
+import us.monoid.web.Resty.*;
 
 public class MainActivity extends Activity {
 	final Context context = this;
@@ -40,6 +49,8 @@ public class MainActivity extends Activity {
 		intent = new Intent(this, SignupActivity.class);
 		startActivity(intent);
 	}
+	@SuppressLint("NewApi")
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public void loginOnClick(View view)
 	{
 		final EditText vEditText1 = (EditText)findViewById(R.id.editText2); // declaration du champs text pour le mdp
@@ -47,6 +58,24 @@ public class MainActivity extends Activity {
 
 		String vTexteEmail = vEditText2.getText().toString(); // récuperation du champs email
 		String vTextePassword = vEditText1.getText().toString();
+		
+		Resty r = new Resty();
+		try {
+			
+			ThreadPolicy tp = ThreadPolicy.LAX;
+			StrictMode.setThreadPolicy(tp);
+			r.withHeader("Content-type", "application/json");
+			Object name = r.json("http://eventid.rodrigueh.com/api/Authentication",content("{Username: '"+ vTexteEmail+"', Password:'"+ vTextePassword+"'}"));
+			if(name != null)
+			{
+				
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		// verification des champs
 		if (vTexteEmail.equals("email")&& vTextePassword.equals("password") )
