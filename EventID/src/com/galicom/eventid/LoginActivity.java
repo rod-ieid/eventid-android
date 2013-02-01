@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import static us.monoid.web.Resty.*;
+import us.monoid.web.Resty.*;
 
 public class LoginActivity extends Activity {
 
