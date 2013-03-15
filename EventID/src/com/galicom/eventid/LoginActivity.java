@@ -1,8 +1,11 @@
 package com.galicom.eventid;
 
+
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 
@@ -13,6 +16,7 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
 	}
 
 	@Override
@@ -31,10 +35,12 @@ public class LoginActivity extends Activity {
 	}
 	public void logoutOnClick(View view)
 	{
-		Intent intent;
+/*		Intent intent;
 		intent = new Intent(this, MainActivity.class);
-		startActivity(intent);
+		startActivity(intent);*/
+		getSharedPreferences("login", 0).edit().clear().commit();
+		finish();
 	}
-
+	 
 
 }
