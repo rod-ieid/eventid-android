@@ -8,51 +8,56 @@
         android:id="@+id/signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/login"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="27dp"
+        android:onClick="signupOnClick"
         android:text="SIGNUP"
-        android:textSize="15sp"
-        android:onClick="signupOnClick" />
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="36dp"
-        android:text="LOGIN"
-        android:textSize="15sp"
-        android:onClick="loginOnClick" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_above="@+id/signup"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="72dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword" >
-
-        <requestFocus />
-
-    </EditText>
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="14dp"
+        android:onClick="loginOnClick"
+        android:text="LOGIN"
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/editText2"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="52dp"
         android:ems="10"
         android:hint="Email" >
 
         <requestFocus />
-
     </EditText>
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/checkBox1"
+        android:layout_alignRight="@+id/editText3"
+        android:layout_marginBottom="38dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="23dp"
+        android:text="Se souvenir de moi" />
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.galicom.eventid;
 
 import java.io.IOException;
+import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import static us.monoid.web.Resty.*;
@@ -41,18 +43,21 @@ import us.monoid.web.Resty;
 import us.monoid.web.Resty.*;
 
 public class MainActivity extends Activity {
+	
 	final Context context = this;
+	//final CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox1);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		SharedPreferences settings	=getSharedPreferences("login", 0);
-		if(settings.getString("email", null) != null)
+		
+	       
+		
+		SharedPreferences settings	=getSharedPreferences("login", 0); // methode recuperant les données
+		if(settings.getString("email", null) != null)  // verifie si les champs sont deja mémoriser
 			loginOnClick(null);
 	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -74,22 +79,25 @@ public class MainActivity extends Activity {
 	{
 		final EditText vEditText1 = (EditText)findViewById(R.id.editText2); // declaration du champs text pour le mdp
 		final EditText vEditText2 = (EditText)findViewById(R.id.editText3); // declaration du champs text pour l'email
+		final CheckBox checkBox1 = (CheckBox) findViewById(R.id.checkBox1);
 
 		String vTexteEmail;
 		String vTextePassword;
+		
+		
 		SharedPreferences settings	=getSharedPreferences("login", 0);
 		if(view != null) {
 		vTexteEmail = vEditText2.getText().toString(); // récuperation du champs email
 		vTextePassword = vEditText1.getText().toString();
 		} else {
-			vTexteEmail = settings.getString("email", null);
+			vTexteEmail = settings.getString("email", null); //recuperation mail
 			vTextePassword = settings.getString("password", null);
-		}
 		
-		Log.d("TEST", vTexteEmail);
-		Log.d("TEST2", vTextePassword);
+		}
+		//Log.d("TEST", vTexteEmail);
+		//Log.d("TEST2", vTextePassword);
 
-
+		//ProfilActivity objet = new ProfilActivity(vTexteEmail);
 
 		ThreadPolicy tp = ThreadPolicy.LAX;
 		StrictMode.setThreadPolicy(tp);
@@ -152,16 +160,32 @@ public class MainActivity extends Activity {
 					Session.getInstance().setCurrentStudent(st);
 					//Session.getInstance().getCurrentStudent(); récuperer étudiant courant
 				}
-				SharedPreferences.Editor editor = settings.edit();
-				editor.putString("email", vTexteEmail);
-				editor.putString("password", vTextePassword);
-				editor.commit();
-				Intent intent;
+				
+				
+		       
+				//if (checkBox1.isChecked()) {
+					SharedPreferences.Editor editor = settings.edit(); // enregistre les identifiants 
+					editor.putString("email", vTexteEmail);
+					editor.putString("password", vTextePassword);
+					editor.commit();
+				//}
+				
+		        Intent intent;
 				intent = new Intent(this, LoginActivity.class);
 				startActivity(intent);
-
-
-
+				
+				Intent intent2 = new Intent("com.google.zxing.client.android.SCAN");
+				intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+				startActivityForResult(intent2, 0);
+				/*
+				user = r.json("http://eventid.rodrigueh.com/api/authentication");
+	               Representation rep = res.get();
+	               try {
+	                   Log.d(TAG, rep.getText());
+	               } catch (IOException e) {
+	                   Log.d(TAG, e.getMessage());
+	               }
+	               */
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -226,6 +250,17 @@ public class MainActivity extends Activity {
 
 
 	}
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		   if (requestCode == 0) {
+		      if (resultCode == RESULT_OK) {
+		         String contents = intent.getStringExtra("SCAN_RESULT");
+		         String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+		         // Handle successful scan
+		      } else if (resultCode == RESULT_CANCELED) {
+		         // Handle cancel
+		      }
+		   }
+		}
 
 }
 
